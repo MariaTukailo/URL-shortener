@@ -4,6 +4,7 @@ import com.example.urlshortener.dto.JwtResponseDto;
 import com.example.urlshortener.dto.UserLoginDto;
 import com.example.urlshortener.dto.UserRegistrationDto;
 import com.example.urlshortener.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,12 @@ public class AuthController {
     private final AuthService authService;
 
 @PostMapping("/register")
-    public ResponseEntity<JwtResponseDto> register(@RequestBody UserRegistrationDto request) {
+    public ResponseEntity<JwtResponseDto> register(@Valid @RequestBody UserRegistrationDto request) {
     return ResponseEntity.status(201).body(authService.register(request));
 }
 
 @PostMapping("/login")
-    public ResponseEntity<JwtResponseDto> login(@RequestBody UserLoginDto request){
+    public ResponseEntity<JwtResponseDto> login(@Valid @RequestBody UserLoginDto request){
     return ResponseEntity.ok(authService.login(request));
 }
 

@@ -6,14 +6,18 @@ import com.example.urlshortener.mapper.LinkMapper;
 import com.example.urlshortener.mapper.UserMapper;
 import com.example.urlshortener.service.LinkService;
 import com.example.urlshortener.service.UserService;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
@@ -44,8 +48,8 @@ public class AdminController {
 
     @PatchMapping("/user/{id}")
     public UserForAdminDto updateUserById(@PathVariable Long id,
-                           @RequestParam(required = false) String username,
-                           @RequestParam (required = false)String email)
+                                          @Size(min = 3, max = 50) @RequestParam(required = false) String username,
+                          @Email @RequestParam (required = false)String email)
     {
         return userMapper.toUserForAdminDto(userService.updateUser(id,email,username));
 
