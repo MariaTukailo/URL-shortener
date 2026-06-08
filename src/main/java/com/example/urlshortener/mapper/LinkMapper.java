@@ -11,5 +11,5 @@ public interface LinkMapper {
   LinkForUserDto toLinkForUserDto(Link link);
 
   @Mapping(target = "userName",source = "user.username")
-  LinkForAdminDto LinkForAdminDto(Link link);
+  LinkForAdminDto toLinkForAdminDto(Link link);
 }

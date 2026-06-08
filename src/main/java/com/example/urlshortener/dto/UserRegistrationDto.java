@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Schema(description = "Объект передачи данных цветов")
 public class UserRegistrationDto {
 
     private String username;
