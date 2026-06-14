@@ -5,6 +5,7 @@ import com.example.urlshortener.entity.User;
 import com.example.urlshortener.repository.LinkRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LinkService {
@@ -29,6 +31,7 @@ public class LinkService {
 
     public void deleteLink(Long id){
         linkRepository.deleteById(id);
+        log.info("Link deleted: id={}", id);
 
     }
 
@@ -42,6 +45,7 @@ public class LinkService {
         link.setOriginalUrl(originalUrl);
         link.setUser(user);
         link.setShortUrl(generateShortCode());
+        log.info("Link created: {} -> {}", link.getShortUrl(), originalUrl);
         return linkRepository.save(link);
     }
 

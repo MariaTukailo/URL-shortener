@@ -8,11 +8,13 @@ import com.example.urlshortener.entity.User;
 import com.example.urlshortener.repository.UserRepository;
 import com.example.urlshortener.security.JwtService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -32,6 +34,7 @@ public JwtResponseDto register(UserRegistrationDto request){
     userRepository.save(user);
 
     String token = jwtService.generateToken(user.getUsername(),user.getRole());
+    log.info("User registered: {}", user.getUsername());
    return JwtResponseDto.builder()
             .id(user.getId())
             .token(token)
@@ -52,6 +55,7 @@ public JwtResponseDto login(UserLoginDto request){
     User user = userService.findByUsername(request.getUsername());
     String token = jwtService.generateToken(user.getUsername(),user.getRole());
 
+    log.info("User logged in: {}", user.getUsername());
     return JwtResponseDto.builder()
             .id(user.getId())
             .token(token)
