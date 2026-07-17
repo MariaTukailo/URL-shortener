@@ -4,7 +4,6 @@ import com.example.urlshortener.entity.Link;
 import com.example.urlshortener.entity.User;
 import com.example.urlshortener.repository.LinkRepository;
 import com.example.urlshortener.service.LinkService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

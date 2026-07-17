@@ -41,6 +41,7 @@ public class LinkService {
     }
 
     public Link createLink (String originalUrl, User user){
+        System.out.println(">>> LinkService.createLink CALLED: " + originalUrl);
         Link link =new Link();
         link.setOriginalUrl(originalUrl);
         link.setUser(user);
@@ -49,13 +50,16 @@ public class LinkService {
         return linkRepository.save(link);
     }
 
-    private String generateShortCode(){
+    private String generateShortCode() {
         String shortCode;
-
-        do{
-            shortCode= RandomStringUtils.randomAlphanumeric(6);
-
-        }while(linkRepository.existsByShortUrl(shortCode));
+        int attempts = 0;
+        do {
+            shortCode = RandomStringUtils.randomAlphanumeric(6);
+            attempts++;
+            if (attempts > 100) {
+                throw new RuntimeException("Failed to generate unique short code");
+            }
+        } while (linkRepository.existsByShortUrl(shortCode));
         return shortCode;
     }
 

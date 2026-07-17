@@ -4,6 +4,7 @@ import com.example.urlshortener.entity.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Schema(description = "Link information for user view")
 public class LinkForUserDto {
+
+    @NotNull
+    @Schema(description = "Link ID",example="1")
+    Long id;
 
     @NotBlank
     @Schema(description = "Short Url",example="http://localhost:8080/r/abc123")
